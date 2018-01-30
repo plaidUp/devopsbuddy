@@ -1,4 +1,9 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
+<<<<<<< HEAD:src/main/java/com/devopsbuddy/backend/persistence/domain/backend/Plan.java
+=======
+
+import com.devopsbuddy.enums.PlansEnum;
+>>>>>>> jpa:src/main/java/com/devopsbuddy/backend/persistence/domain/backend/Plan.java
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +21,15 @@ public class Plan implements Serializable {
 
     /* Default Constructor */
     public Plan() {}
+
+    /**
+     * Full Constructor
+     * @param plansEnum
+     */
+    public Plan(PlansEnum plansEnum) {
+        this.id = plansEnum.getId();
+        this.name = plansEnum.getPlanName();
+    }
 
     @Override
     public boolean equals(Object o) {
