@@ -1,4 +1,4 @@
-package com.devopsbuddy.backend.persistence.converters.domain.backend;
+package com.devopsbuddy.backend.persistence.domain.backend;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -23,6 +23,7 @@ public class User implements Serializable{
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private boolean enabled;
 
     @Length(max = 500)
     private String description;
@@ -137,6 +138,14 @@ public class User implements Serializable{
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getDescription() {
