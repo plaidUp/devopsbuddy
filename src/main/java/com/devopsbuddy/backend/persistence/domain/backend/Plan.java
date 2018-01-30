@@ -1,4 +1,4 @@
-package com.devopsbuddy.backend.persistence.converters.domain.backend;
+package com.devopsbuddy.backend.persistence.domain.backend;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
