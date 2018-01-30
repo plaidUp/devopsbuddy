@@ -11,12 +11,14 @@ public class UserRole implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
 
@@ -28,6 +30,15 @@ public class UserRole implements Serializable{
     }
 
     //region GETTERS/SETTERS
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;
@@ -55,14 +66,11 @@ public class UserRole implements Serializable{
 
         UserRole userRole = (UserRole) o;
 
-        if (user != null ? !user.equals(userRole.user) : userRole.user != null) return false;
-        return role != null ? role.equals(userRole.role) : userRole.role == null;
+        return id == userRole.id;
     }
 
     @Override
     public int hashCode() {
-        int result = user != null ? user.hashCode() : 0;
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 }

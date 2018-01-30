@@ -1,10 +1,6 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
-<<<<<<< HEAD:src/main/java/com/devopsbuddy/backend/persistence/domain/backend/Plan.java
-=======
 
 import com.devopsbuddy.enums.PlansEnum;
->>>>>>> jpa:src/main/java/com/devopsbuddy/backend/persistence/domain/backend/Plan.java
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
