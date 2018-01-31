@@ -1,7 +1,7 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
 
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.GrantedAuthority;
+
 
 public class Authority implements GrantedAuthority {
 

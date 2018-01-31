@@ -1,5 +1,6 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
 
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,11 +12,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Data
 public class User implements Serializable, UserDetails{
 
     /** The Serial Version UID for Serializable classes */
     private static final long serialVersionUID = 1L;
 
+    //region Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -47,9 +50,19 @@ public class User implements Serializable, UserDetails{
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
 
+    //endregion
+
+    //region Constructors
+
+    /* The default Constructor */
     public User() {}
 
+    //endregion
+
+    //region Equals and Hashcode methods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,124 +102,9 @@ public class User implements Serializable, UserDetails{
         result = 31 * result + (plan != null ? plan.hashCode() : 0);
         return result;
     }
-
-    //region GETERS/SETTERS
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
-
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public String getStripeCustomerId() {
-        return stripeCustomerId;
-    }
-
-    public void setStripeCustomerId(String stripeCustomerId) {
-        this.stripeCustomerId = stripeCustomerId;
-    }
-
-    public Plan getPlan() {
-        return plan;
-    }
-
-    public void setPlan(Plan plan) {
-        this.plan = plan;
-    }
-
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
-
     //endregion
 
-
+    //region UserDetails impl
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -228,4 +126,5 @@ public class User implements Serializable, UserDetails{
     public boolean isCredentialsNonExpired() {
         return true;
     }
+    //endregion
 }

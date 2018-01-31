@@ -1,14 +1,19 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "user_role")
+@Data
 public class UserRole implements Serializable{
 
     /** The Serial Version UID for Serializable classes */
     private static final long serialVersionUID = 1L;
+
+    //region Attributes
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +27,10 @@ public class UserRole implements Serializable{
     @JoinColumn(name = "role_id")
     private Role role;
 
+    //endregion
+
+    //region Constructors
+
     public UserRole() {}
 
     public UserRole(User user, Role role) {
@@ -29,36 +38,9 @@ public class UserRole implements Serializable{
         this.role = role;
     }
 
-    //region GETTERS/SETTERS
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     //endregion
 
-
+    //region HashCode and Equals Methods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,4 +55,6 @@ public class UserRole implements Serializable{
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+    //endregion
 }
