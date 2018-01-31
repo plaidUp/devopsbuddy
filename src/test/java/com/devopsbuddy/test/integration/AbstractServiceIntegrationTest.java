@@ -20,19 +20,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.HashSet;
 import java.util.Set;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = DevopsbuddyApplication.class)
-public class UserServiceIntegrationTest extends AbstractServiceIntegrationTest {
+public abstract class AbstractServiceIntegrationTest {
+    @Autowired
+    protected UserService userService;
 
-    @Rule public TestName testName = new TestName();
+    protected User createUser(TestName testName) {
+        String username = testName.getMethodName();
+        String email = testName.getMethodName() + "@devopsbuddy.com";
 
-    @Test
-    public void testCreateNewUser() throws Exception {
+        Set<UserRole> userRoles = new HashSet<>();
+        User basicUser = UserUtils.createBasicUser(username, email);
+        userRoles.add(new UserRole(basicUser, new Role(RolesEnum.BASIC)));
 
-        User user = createUser(testName);
-        Assert.assertNotNull(user);
-        Assert.assertNotNull(user.getId());
-
+        return userService.createUser(basicUser, PlansEnum.BASIC, userRoles);
     }
-
 }
