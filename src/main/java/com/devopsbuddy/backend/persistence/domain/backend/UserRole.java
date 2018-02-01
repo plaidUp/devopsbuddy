@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "user_role")
-@Data
 public class UserRole implements Serializable{
 
     /** The Serial Version UID for Serializable classes */
@@ -54,6 +53,34 @@ public class UserRole implements Serializable{
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
+    }
+
+    //endregion
+
+    //region GETTERS/SETTERS
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     //endregion
