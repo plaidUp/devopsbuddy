@@ -5,7 +5,7 @@
 
 <body>
 
-    <div th:replace="common/navbar :: common-navbar"/>
+    <div th:replace="common/navbar :: common-navbar"></div>
 
     <div class="container">
         <div class="row">
@@ -45,6 +45,7 @@
                                 <button type="submit" th:text="#{navbar.login.text}" class="btn btn-primary"></button>
                             </div>
                         </form>
+                        <a th:href="@{/forgotmypassword}" th:text="#{login.forgot.password.text}" />
                     </div>
                 </div>
             </div>
@@ -54,6 +55,6 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <div th:replace="common/header :: before-body-scripts"/>
+    <div th:replace="common/header :: before-body-scripts"></div>
 </body>
 </html>
